@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OTP Verification</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .icon {
+        font-size: 48px;
+        margin-bottom: 16px;
+      }
+
+      h2 {
+        color: #1f2937;
+        margin-bottom: 8px;
+        font-size: 24px;
+      }
+
+      p {
+        color: #6b7280;
+        font-size: 14px;
+        margin-bottom: 24px;
+        line-height: 1.5;
+      }
+
+      /* --- EMAIL FIELD STYLING --- */
+      .input-group {
+        text-align: left;
+        margin-bottom: 20px;
+      }
+
+      .input-group label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        color: #374151;
+        margin-bottom: 6px;
+      }
+
+      .email-input {
+        width: 100%;
+        height: 48px;
+        padding: 0 14px;
+        font-size: 16px;
+        border: 2px solid #d1d5db;
+        border-radius: 8px;
+        outline: none;
+        color: #1f2937;
+        transition: all 0.15s ease;
+      }
+
+      .email-input:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      }
+
+      /* --- OTP SINGLE INPUT ARCHITECTURE --- */
+      .otp-box-container {
+        position: relative;
+        width: 100%;
+        height: 56px;
+        margin-bottom: 24px;
+      }
+
+      .otp-display-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .digit-box {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid #d1d5db;
+        border-radius: 8px;
+        background: #ffffff;
+        font-size: 22px;
+        font-weight: bold;
+        color: #1f2937;
+        transition: all 0.15s ease;
+      }
+
+      .otp-real-input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 2;
+        cursor: text;
+      }
+
+      /* Active focus effects mapping across structural elements */
+      .otp-real-input:focus ~ .otp-display-grid .digit-box.active {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+      }
+
+      .digit-box.filled {
+        border-color: #9ca3af;
+      }
+
+      /* --- BUTTONS & FOOTER --- */
+      .verify-btn {
+        width: 100%;
+        background-color: #2563eb;
+        color: white;
+        border: none;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background-color 0.2s;
+      }
+
+      .verify-btn:hover {
+        background-color: #1d4ed8;
+      }
+
+      .resend {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #6b7280;
+      }
+
+      .resend a {
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .resend a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">🔒</div>
+      <h2>Verify Your Identity</h2>
+      <div class="text-center">
+        <center>
+          {% if msg %}
+          <h4 style="color: red">{{msg}}</h4>
+          {% endif %}
+        </center>
+      </div>
+      <p>
+        We've sent a 6-digit one-time passcode to your device. Please enter it
+        below to complete verification.
+      </p>
+
+      <form id="otp-form" action="{% url 'otpverify' %}" method="POST">
+        {% csrf_token %}
+        <!-- ADDED EMAIL FIELD HERE -->
+        <div class="input-group">
+          <label for="email">Email Address</label>
+          <input
+            type="email"
+            id="email"
+            class="email-input"
+            name="email"
+            value="{{email}}"
+            readonly
+          />
+        </div>
+
+        <div class="input-group" style="text-align: left; margin-bottom: 6px">
+          <label>Enter your OTP</label>
+        </div>
+
+        <div class="otp-box-container">
+          <input
+            type="text"
+            id="otp-input"
+            class="otp-real-input"
+            inputmode="numeric"
+            maxlength="6"
+            name="otp"
+            required
+          />
+
+          <div class="otp-display-grid">
+            <div class="digit-box active"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+            <div class="digit-box"></div>
+          </div>
+        </div>
+
+        <button type="submit" class="verify-btn">Verify OTP</button>
+      </form>
+
+      <div class="resend">
+        Didn't receive the code? <a href="{% url 'otpverify' %}" id="resend-link">Resend Code</a>
+      </div>
+    </div>
+
+    <script>
+      const realInput = document.getElementById("otp-input");
+      const digitBoxes = document.querySelectorAll(".digit-box");
+      const emailInput = document.getElementById("email");
+
+      realInput.addEventListener("input", (e) => {
+        let value = e.target.value;
+
+        // Enforce only digits
+        value = value.replace(/[^0-9]/g, "");
+        e.target.value = value;
+
+        digitBoxes.forEach((box, index) => {
+          if (index < value.length) {
+            box.textContent = value[index];
+            box.classList.add("filled");
+            box.classList.remove("active");
+          } else {
+            box.textContent = "";
+            box.classList.remove("filled");
+            box.classList.remove("active");
+          }
+
+          if (index === value.length) {
+            box.classList.add("active");
+          }
+        });
+      });
+
+      realInput.addEventListener("focus", () => {
+        const currentLen = realInput.value.length;
+        if (currentLen < digitBoxes.length) {
+          digitBoxes[currentLen].classList.add("active");
+        }
+      });
+
+      realInput.addEventListener("blur", () => {
+        digitBoxes.forEach((box) => box.classList.remove("active"));
+      });
+
+    realInput.focus();
+    </script>
+  </body>
+</html>

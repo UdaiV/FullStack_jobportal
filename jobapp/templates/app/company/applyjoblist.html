@@ -1,0 +1,133 @@
+{% extends "app/company/base1.html" %} 
+{% block content %} 
+{% load static %}
+
+<!-- Required Stylesheets for layout styling -->
+<link href="https://jsdelivr.net" rel="stylesheet" />
+<link href="{% static '/company/css/styles.css' %}" rel="stylesheet" />
+<script src="https://fontawesome.com" crossorigin="anonymous"></script>
+
+<div class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+    </nav>
+    
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <div class="sb-sidenav-menu-heading">Core</div>
+                          <a class="nav-link" href="#">
+                                <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                                Charts
+                            </a>
+                            <a class="nav-link" href="tableshow">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Job Post List
+                            </a>
+                            <a class="nav-link" href="applyjoblist">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Apply Job List
+                            </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Job Post List</h1>
+                    <ol class="breadcrumb mb-4">
+                        <li class="breadcrumb-item"><a href="companyindex">Dashboard</a></li>
+                         <li class="breadcrumb-item"><a href="tableshow">Job Post List</a></li>
+                          <li class="breadcrumb-item"><a href="applyjoblist">Apply job LIst</a></li>
+                    </ol>
+                    
+                    <!-- DataTable Card Layout Wrapper -->
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-table me-1"></i>
+                            Applied Candidates
+                        </div>
+                        <div class="card-body">
+                            <!-- FIXED: Correct table setup with an exact matching ID -->
+                            <table id="datatablesSimple">
+                                <thead>
+                                    <tr>
+                                        <th>Job Name</th>
+                                        <th>Candidate Name</th>
+                                        <th>Experience</th>
+                                        <th>Location</th>
+                                        <th>Min Salary</th>
+                                        <th>Max Salary</th>
+                                         <th>Contact</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th>Job Name</th>
+                                        <th>Candidate Name</th>
+                                        <th>Experience</th>
+                                        <th>Location</th>
+                                        <th>Min Salary</th>
+                                        <th>Max Salary</th>
+                                        <th>Contact</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <!-- FIXED: Django loop placed properly around data rows only -->
+                                    {% if all_job %} 
+                                        {% for i in all_job %}
+                                        <tr>
+                                            <td>{{ i.job.jobname }}</td>
+                                            <td>{{ i.candidate.FirstName }} {{ i.candidate.LastName }}</td>
+                                            <td>{{ i.experience }}</td>
+                                            <td>{{ i.candidate.City|default:"Not Provided" }}</td>
+                                            <td>{{ i.candidate.min_salary }}</td>
+                                            <td>{{ i.candidate.max_salary }}</td>
+                                            <td>{{i.candidate.Contact |default:"Not Provided" }}</td>
+                                        </tr>
+                                        {% endfor %} 
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; Your Website 2026</div>
+                        <div>
+                            <a href="#">Privacy Policy</a>
+                            &middot;
+                            <a href="#">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+
+<!-- FIXED: Injected missing JS Engine scripts inside block scope -->
+<script src="https://jsdelivr.net" crossorigin="anonymous"></script>
+<script src="{% static '/company/js/scripts.js' %}"></script>
+<script src="https://jsdelivr.net" crossorigin="anonymous"></script>
+
+<!-- Target execution snippet directly mapped to convert layouts -->
+<script>
+    window.addEventListener('DOMContentLoaded', event => {
+        const datatablesSimple = document.getElementById('datatablesSimple');
+        if (datatablesSimple) {
+            new simpleDatatables.DataTable(datatablesSimple);
+        }
+    });
+</script>
+
+{% endblock %}

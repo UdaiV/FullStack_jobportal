@@ -1,0 +1,128 @@
+{% extends 'app/company/base1.html' %}
+{% load static %}
+
+{% block content %}
+<div id="layoutSidenav_content">
+    <main>
+        <div class="container-fluid px-4 mt-4">
+            {% if msg %}
+           <center style="margin-top: 50px;">
+             <span class="success-box" style="display: inline-flex; align-items: center; padding: 12px 24px; background-color: #ecfdf5; border: 1px solid #10b981; border-radius: 6px; color: #065f46; font-family: sans-serif;">
+              <span class="success-content" style=" font-size: 14px; line-height: 1.5;  padding-right: 24px; ">
+        <span class="success-bold" style="font-weight: 700;">Success </span> {{msg}}.
+    </span>
+    </span>
+           </center>
+           {% endif %}
+            <h1 class="mt-4">Job Post Form</h1>
+            <ol class="breadcrumb mb-4">
+                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item active">Job Post Form</li>
+            </ol>
+
+            <div class="row">
+                <div class="col-xl-8">
+                    <!-- Account details card-->
+                    <div class="card mb-4 border-0 shadow-sm">
+                       
+                        <div class="card-body p-4">
+                            <!-- CRITICAL: enctype="multipart/form-data" allows files to stream via request.FILES -->
+                            <form method="POST" enctype="multipart/form-data" action="{% url 'jobpost'  %}">
+                                {% csrf_token %}
+                               
+                                <!-- Form Row-->
+                                  <div class="col-md-12">
+                                        <label class="small mb-1" for="compname">Job name</label>
+                                        <input class="form-control" id="inputcompname" name="jobname" type="text" placeholder="Enter Job name" value="">
+                                    </div>
+                                  <div class="col-md-12">
+                                        <label class="small mb-1" for="compname">Company name</label>
+                                        <input class="form-control" id="inputcompname" name="companyname" type="text" placeholder="Enter Company name" value="">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label class="small mb-1" for="compname">Company Address</label>
+                                        <input class="form-control" id="inputcompname" name="companyaddress" type="text" placeholder="Enter Company Address" value="">
+                                    </div>
+                              
+
+                                <!-- Form Row -->
+                                <div class="row gx-3 mb-3">
+                                 
+                                    <!-- Contact input-->
+                                    <div class="col-md-10">
+                                        <label class="small mb-1" for="inputPhone">Contact Number</label>
+                                        <input class="form-control" id="inputPhone" name="contact" type="tel" placeholder="Enter phone number" value="">
+                                    </div>
+                             
+                                     <div class="col-md-10">
+                                        <label class="small mb-1" for="inputPhone">Company Email</label>
+                                        <input class="form-control" id="inputPhone" name="email" type="tel" placeholder="Enter Email" value="">
+                                    </div>
+                         
+                                <!-- Website link input-->
+                              <div class="col-md-10">
+                                    <label class="small mb-1" for="inputWebsite">Website URL</label>
+                                    <input class="form-control" id="inputWebsite" name="website"  placeholder="https://example.com" value="">
+                                </div>
+                          
+
+                                <!-- Description textarea-->
+                              <div class="col-md-10">
+                                    <label class="small mb-1" for="inputDescription">Job Description</label>
+                                    <textarea class="form-control" id="inputDescription" name="description" rows="4" placeholder="Describe Job here..." ></textarea>
+                                </div>
+                           <div class="col-md-10">
+                                    <label class="small mb-1" >Qualificaition</label>
+                                    <input class="form-control"  name="qualification"  placeholder="Eg:- MCA,Btech etc.." value="">
+                                </div>
+                                <div class="col-md-10">
+                                    <label class="small mb-1" >Responsibilites</label>
+                                    <input class="form-control"  name="responsibility"   value="">
+                                </div>
+                                 <div class="col-md-10">
+                                    <label class="small mb-1" >Location</label>
+                                    <input class="form-control"  name="location"   value="">
+                                </div>
+                           <div class="col-md-10">
+                                    <label class="small mb-1" >Salary Package</label>
+                                    <input class="form-control"  name="salary"   value="">
+                                </div>
+                                 <div class="col-md-10">
+                                    <label class="small mb-1" >Experience</label>
+                                    <input class="form-control"  name="experience"  value="">
+                                </div>
+                          
+
+                                <!-- Logo Image uploading input wrapper -->
+                                <div class="mb-4">
+                                    <label class="small mb-1" for="inputLogo">Company Logo Image</label>
+                                    <input class="form-control" id="inputLogo" name="logo" type="file">
+                                </div>
+
+                                <!-- Save changes button-->
+                                <button class="btn btn-primary px-4" type="submit">Save Changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Box Sidebar Column -->
+                <div class="col-xl-4">
+                    <div class="card mb-4 border-0 shadow-sm text-center">
+                        <div class="card-header bg-dark text-white py-3">Current Logo Preview</div>
+                        <div class="card-body p-4">
+                            <!-- Circular Avatar Container component matching your style -->
+                            <div class="card border-0 shadow-sm bg-white mx-auto mb-3" style="border-radius: 50%; width: 120px; height: 120px; overflow: hidden; display: inline-block;">
+                               
+                                    <img src="{% static 'company/img/default-logo.png' %}" alt="Default Logo placeholder" style="width: 100%; height: 100%; object-fit: cover;">
+                             
+                            </div>
+                            <div class="small font-italic text-muted mb-2">JPG or PNG no larger than 2MB</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

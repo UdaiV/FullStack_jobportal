@@ -1,0 +1,31 @@
+{% extends "app/base1.html" %}
+{% block content %}
+{% load static %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Skillhunt</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{%  static '/css/styles.css' %}">
+</head>
+<body class="bg-light">
+    
+
+    <div class="container py-5">
+        <h2 class="text-center font-weight-bold mb-5">Career Insights & Articles</h2>
+        <div class="row">
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm bg-white h-100 blog-card">
+                    <div class="bg-dark text-white text-center d-flex align-items-center justify-content-center font-weight-bold" style="height: 180px;">Article Graphic</div>
+                    <div class="card-body">
+                        <div class="text-muted small mb-2">August 30, 2026 &bull; Career Advice</div>
+                        <h4 class="card-title h5 font-weight-bold text-dark mb-3">How to Structure Your Remote Engineering Resume</h4>
+                        <p class="card-text text-muted small">Learn definitive layout setups to clear modern algorithmic hiring checkpoints.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

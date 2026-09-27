@@ -1,0 +1,160 @@
+/* Skillhunt Core Theme Stylesheet */
+:root {
+    --primary-color: #2f89fc;
+    --dark-bg: #1e1e24;
+}
+
+body {
+    font-family: "Nunito", Arial, sans-serif;
+    color: #666666;
+}
+
+.custom-nav .navbar-brand span {
+    color: var(--primary-color);
+}
+
+.hero-wrap {
+    height: 75vh;
+    min-height: 550px;
+    background-image: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+}
+
+.hero-wrap .overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: #000000;
+    opacity: 0.45;
+}
+/* Container sizing rule for optimal alignment layout */
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+}
+
+/* Core Wrapper Setup */
+.custom-select-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 320px;
+    display: inline-block;
+}
+
+/* Upgraded Select Layout Engine */
+.skillhunt-select {
+    display: block;
+    width: 100%;
+    height: 48px;
+    padding: 10px 40px 10px 16px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #333333;
+    background-color: #ffffff;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    
+    /* 1. FORCE STRIP ALL BROWSER DEFAULTS (Order Matters) */
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+}
+
+/* 2. FORCE OPERATING SYSTEM HACKS TO CLEAR STYLES (For IE/Edge/Firefox) */
+.skillhunt-select::-ms-expand {
+    display: none !important; /* Removes arrow in older Edge/IE versions */
+}
+
+/* 3. GENERATE EM-BASED PURE CSS ARROW TO AVOID SVG LINK ISSUES */
+.custom-select-wrapper::after {
+    content: "";
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    
+    /* Creates a perfect CSS border triangle (Cross-browser safe) */
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 6px solid #333333; 
+    
+    pointer-events: none; /* Allows clicks to pass through straight to the select field */
+    z-index: 10;
+}
+
+/* 4. Shift arrow color if the element is disabled */
+.skillhunt-select:disabled + ::after {
+    border-top-color: #999999 !important;
+}
+
+.skillhunt-select:disabled {
+    background-color: #f5f5f5;
+    color: #999999;
+    border-color: #dcdcdc;
+    cursor: not-allowed;
+}
+.custom-select-wrapper {
+    position: relative;
+}
+
+.skillhunt-select {
+    -webkit-appearance: none;
+    appearance: none;
+    padding-right: 40px; /* Leave space for icon */
+}
+
+/* Positions the icon precisely over the native area */
+.select-icon-overlay {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #333333;
+    font-size: 14px;
+    pointer-events: none; /* Crucial so dropdown opens when icon is clicked */
+}
+  .otp-container {
+            position: relative;
+            /* Formula: (6 boxes * box width) + (5 gaps * gap width) */
+            width: calc((6 * var(--box-width)) + (5 * var(--gap)));
+            margin: 24px auto;
+            overflow: hidden;
+        }
+
+        .otp-single-input {
+            width: 100%;
+            font-size: 28px;
+            font-family: monospace; /* Crucial: ensures every digit is exactly the same width */
+            font-weight: bold;
+            letter-spacing: var(--gap);
+            /* Offset padding to perfectly align text inside the linear background grid */
+            padding-left: calc(var(--gap) / 2 + 6px); 
+            border: none;
+            outline: none;
+            background: transparent;
+            border-radius: 100px;
+            
+        }
+
+.search-wrap {
+    margin-top: -50px;
+    z-index: 5;
+    position: relative;
+    border-radius: 8px !important;
+}
+
+.job-post-item, .candidate-card, .blog-card {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.job-post-item:hover, .candidate-card:hover, .blog-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0px 10px 25px -5px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-3px);
+}

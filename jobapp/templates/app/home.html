@@ -1,0 +1,104 @@
+{% extends "app/base1.html" %}
+{% block content %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Skillhunt - Job Board Template</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="{%  static '/css/styles.css' %}" />
+  </head>
+  <body>
+    <header class="hero-wrap d-flex align-items-center">
+      <div class="overlay"></div>
+      <div class="container text-center text-white position-relative z-index-2">
+        <h1 class="display-4 font-weight-bold mb-3">
+          The Easiest Way to Get Your New Job
+        </h1>
+        <p class="lead mb-5">
+          Find jobs, employment & career opportunities online today.
+        </p>
+        <div
+          class="card p-4 text-dark text-left shadow-lg border-0 bg-white search-wrap"
+        >
+          <form action="joblist" method="GET">
+            <div class="form-row align-items-center">
+              <div class="col-md-4 my-2">
+                <input
+                  type="text"
+                  class="form-control form-control-lg border-0"
+                  placeholder="eg. Web Developer"
+                />
+              </div>
+              <div class="col-md-3 my-2 border-left border-right">
+                <select class="form-control form-control-lg border-0">
+                  <option>Category</option>
+                  <option>Technology</option>
+                  <option>Finance</option>
+                  <option>Creative Design</option>
+                </select>
+              </div>
+              <div class="col-md-3 my-2">
+                <input
+                  type="text"
+                  class="form-control form-control-lg border-0"
+                  placeholder="Location"
+                />
+              </div>
+              <div class="col-md-2 my-2">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-lg btn-block font-weight-bold"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <main class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center font-weight-bold mb-5">
+          Recent Job Board Postings
+        </h2>
+        <div
+          class="job-post-item p-4 d-md-flex align-items-center justify-content-between bg-white rounded shadow-sm mb-3"
+        >
+          <div>
+            <div class="d-flex align-items-center mb-2">
+              <h4 class="h5 font-weight-bold mb-0 mr-3">
+                Senior Frontend Engineer
+              </h4>
+              <span class="badge badge-primary px-3 py-1">Full-Time</span>
+            </div>
+            <p class="text-muted mb-0">Google, Inc. &bull; Mountain View, CA</p>
+          </div>
+          <div class="mt-3 mt-md-0">
+            <a href="login" class="btn btn-primary px-4 py-2 mr-2"
+              >Apply Now</a
+            >
+            <button class="btn btn-outline-secondary px-3 py-2">Save</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="bg-dark text-white text-center py-4">
+      <div class="container">
+        <p class="mb-0 small">&copy; 2026 Skillhunt Portal Platform.</p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static '/js/script.js' %}"></script>
+  </body>
+</html>
+{% endblock %}
