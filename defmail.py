@@ -39,7 +39,7 @@ def send_otp(otp,email_receiver):
         )
         bg_thread.start()
         
-        # ⚡ 4. Instantly return True to views.py so the page loads immediately
+        #  4. Instantly return True to views.py so the page loads immediately
         return True, "Email processing started in background..."
         
     except Exception as e:

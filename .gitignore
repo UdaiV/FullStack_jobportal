@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+#Virtual environments
+venv/
+.venv/
+env/
+#Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+#Django Generated files
+staticfiles/
+*.log
+
+#Local SQLite database
+db.sqlite3
+db.sqlite3-*
+db.sqlite3.backup
+
+
+#Editor and operating system files
+
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+#Personal and user-uploaded resumes
+
+media/app/resume/
+
