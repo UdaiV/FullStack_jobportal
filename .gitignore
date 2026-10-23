@@ -1,35 +1,29 @@
-# Python
+# Python cache files
 __pycache__/
 *.py[cod]
-*.pyo
 
-#Virtual environments
-venv/
+# Virtual environments
 .venv/
+venv/
 env/
-#Environment variables and secrets
+
+# Environment variables
 .env
 .env.*
 !.env.example
 
-#Django Generated files
+# Django generated files
 staticfiles/
 *.log
 
-#Local SQLite database
+# Local database
 db.sqlite3
 db.sqlite3-*
 db.sqlite3.backup
 
-
-#Editor and operating system files
-
-.vscode/
-.idea/
-.DS_Store
-Thumbs.db
-
-#Personal and user-uploaded resumes
-
+# Personal resumes
 media/app/resume/
 
+# Editors
+.vscode/
+.idea/
